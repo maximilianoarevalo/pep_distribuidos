@@ -79,8 +79,7 @@
           <b-form-checkbox value="me">* Declaro que la información otorgada es real</b-form-checkbox>
         </b-form-checkbox-group>
       </b-form-group>
-
-      <b-button type="submit" variant="success" href="/permissionGenerated" v-on:click="creacion">Generar Permiso</b-button>
+      <b-button type="submit" variant="success" >Generar Permiso</b-button>
       <!--<b-button type="reset" variant="danger">Reset</b-button>-->
     </b-form>
     <!-- Show form : TESTING, REMOVE LATER! -->   
@@ -103,7 +102,7 @@ import axios from 'axios'
           rut: '',
           gender: null,
           permission: null,
-          checked: []
+          checked: [],
         },
         genders: [{ text: 'Seleccione su sexo', value: null }, 'Masculino', 'Femenino'],
         permissions: [{ text: 'Seleccione su permiso', value: null }, '1 - Asistencia a establecimientos de salud', '2 - Compras insumos básicos',
@@ -118,21 +117,21 @@ import axios from 'axios'
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
+        console.log(this.form)
         let parameters = {
-          name: this.form.name+' '+this.form.lnP+' '+this.form.lnM,
-          //lastNames: this.form.lnP+' '+this.form.lnM,
+          names: this.form.name,
+          lastName: this.form.lnP+' '+this.form.lnM,
           email: this.form.email,
-          rut: this.form.rut,
           gender: this.form.gender,
-          permission: this.form.permission
+          type: this.form.permission,
+          rut: this.form.rut,
         };
-        axios.post('http://localhost:8081/backend',parameters)
+        axios.post('http://localhost:8080/app/newPass',parameters)
         .then((response) => {
           console.log("Probando el post: "+response)
-          //this.$refs
         })
+        .catch((error)=> console.log(error))
         //alert(JSON.stringify(this.form))
-        
       },
       onReset(evt) {
         evt.preventDefault()

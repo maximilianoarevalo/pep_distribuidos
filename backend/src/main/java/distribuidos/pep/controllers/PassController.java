@@ -19,8 +19,8 @@ public class PassController {
     @Autowired
     PassRepository passRepository;
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+    //@Autowired
+    //private JavaMailSender javaMailSender;
 
     @GetMapping("/pass")
     public ArrayList<Pass> getAllPass() {
@@ -33,12 +33,12 @@ public class PassController {
         pass.setInitialDate(new Date(System.currentTimeMillis()));
         pass.setFinalDate(pass.sumarRestarHorasFecha(pass.getInitialDate(), 2));
 
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(pass.getEmail());
-        msg.setSubject("Información pase");
-        msg.setText("Hello World \n Spring Boot Email");
+        //SimpleMailMessage msg = new SimpleMailMessage();
+        //msg.setTo(pass.getEmail());
+        //msg.setSubject("Información pase");
+        //msg.setText("Hello World \n Spring Boot Email");
 
-        javaMailSender.send(msg);
+        //javaMailSender.send(msg);
 
         return passRepository.save(pass);
     }
