@@ -79,13 +79,31 @@
           <b-form-checkbox value="me">* Declaro que la información otorgada es real</b-form-checkbox>
         </b-form-checkbox-group>
       </b-form-group>
-      <b-button type="submit" variant="success" >Generar Permiso</b-button>
-      <!--<b-button type="reset" variant="danger">Reset</b-button>-->
+     
+    <b-container class="bv-example-row">
+      <b-row>
+        <b-col>
+        <b-button class="a" type="submit" variant="success" @click="showDismissibleAlert=true" >Generar Permiso</b-button>
+        </b-col>
+        <b-col>
+        <b-button class="b" type="reset" variant="primary" @click="showDismissibleAlert=false">Solicitar nuevo permiso</b-button>
+        </b-col>
+      </b-row>
+    </b-container>    
     </b-form>
-    <!-- Show form : TESTING, REMOVE LATER! -->   
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
+    <div class="alert">
+    <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
+      <h1>
+        Permiso generado exitosamente
+      </h1>
+      Identificador del permiso: {{this.id}} <br/> 
+      Nombre solicitante: {{this.fullName}} <br/>
+      RUT: {{this.rut}} <br/> 
+      Razón: {{this.reasson}} <br/>
+      Inicio: {{this.iDate}} <br/>
+      Termino: {{this.fDate}}
+    </b-alert>
+  </div>
   </div>
 </template>
 
@@ -111,7 +129,14 @@ import axios from 'axios'
         '8 - Comparecencia a una citación en virtud de la Ley','9 - Entregar alimentos u otros insumos de primera necesidad a adultos mayores','10 - Proporcionar alimentos o insumos de primera necesidad en Recinto Penitenciario',
         '11 - Traslado del menor o adolescente al hogar del tutelar','12 - Traslado de padres o tutores a establecimientos de Salud o Centros de SENAME','13 - Permiso para donantes de sangre.',
         '14 - Matrimonio y Unión Civil.','15 - Salida de Niños, Niñas y Adolescentes'],
-        show: true
+        show: true,
+        showDismissibleAlert: false,
+        id: 0,
+        fullName: "",
+        reasson: "",
+        iDate: "",
+        fDate: "",
+        rut: ""
       }
     },
     methods: {
@@ -128,9 +153,12 @@ import axios from 'axios'
         };
         axios.post('http://localhost:8080/app/newPass',parameters)
         .then((response) => {
-          console.log("Probando el post: "+response.data.id)
-          alert("Tu ID es: "+response.data.id)
-          console.log("Probando el post: "+response.data.initialDate)
+          this.id = response.data.id
+          this.fullName = response.data.names +' '+response.data.lastName
+          this.reasson = response.data.type
+          this.iDate = response.data.initialDate
+          this.fDate = response.data.finalDate
+          this.rut = response.data.rut
         })
         .catch((error)=> console.log(error))
         //alert(JSON.stringify(this.form))
@@ -142,6 +170,7 @@ import axios from 'axios'
         this.form.lnP = ''
         this.form.lnM = ''
         this.form.email = ''
+        this.form.rut = ''
         this.form.permission = null
         this.form.gender = null
         this.form.checked = []
@@ -173,6 +202,20 @@ import axios from 'axios'
 
 .content{
   margin-bottom: 15px;
+}
+.alert{
+  margin-top: 5px;
+  margin-left:  50px;
+  margin-right: 50px;
+}
+.a{
+  margin-left:  200px;
+  width: 200px;
+
+}
+.b{
+  margin-right: 200px;
+  width: 200px;
 }
 
 </style>
