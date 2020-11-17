@@ -128,7 +128,9 @@ import axios from 'axios'
         };
         axios.post('http://localhost:8080/app/newPass',parameters)
         .then((response) => {
-          console.log("Probando el post: "+response)
+          console.log("Probando el post: "+response.data.id)
+          alert("Tu ID es: "+response.data.id)
+          console.log("Probando el post: "+response.data.initialDate)
         })
         .catch((error)=> console.log(error))
         //alert(JSON.stringify(this.form))
