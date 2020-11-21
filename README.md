@@ -21,11 +21,13 @@ generando problemáticas mucho más complejas desde una perspectiva social y sis
 
 Para el desarrollo del primer entregable se utilizan las siguientes tecnologías:
 
--Frontend: Vue.js
--Backend: Springboot
--Base de Datos: PostgreSQL
+- Frontend: Vue.js
+- Backend: Springboot
+- Base de Datos: PostgreSQL
 
 Los cuales se utilizan para el desarrollo e implementación del entregable, considerando la arquitectura computacional indicada en el enunciado y mostrada a continuación:
+
+![Arquitectura](./images/arquitectura.png)
 
 ## Funcionamiento del sistema
 
