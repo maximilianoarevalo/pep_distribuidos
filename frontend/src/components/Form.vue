@@ -100,8 +100,8 @@
       Nombre solicitante: {{this.fullName}} <br/>
       RUT: {{this.rut}} <br/> 
       Razón: {{this.reasson}} <br/>
-      Inicio: {{this.iDate}} <br/>
-      Termino: {{this.fDate}}
+      Inicio: {{this.iDate | formatDate}} <br/>
+      Termino: {{this.fDate | formatDate}}
     </b-alert>
   </div>
   </div>

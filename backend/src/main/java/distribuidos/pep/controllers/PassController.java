@@ -29,10 +29,11 @@ public class PassController {
 
     @PostMapping("/newPass")
     public Pass createPass(@RequestBody Pass pass) {
-        System.out.print(passRepository.save(pass));
         pass.setInitialDate(new Date(System.currentTimeMillis()));
+        java.util.Date date = java.util.Calendar.getInstance().getTime();
+        System.out.println("Fecha inicial: "+date);
         pass.setFinalDate(pass.sumarRestarHorasFecha(pass.getInitialDate(), 2));
-
+        System.out.println("Fecha final: "+pass.getFinalDate());
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(pass.getEmail());
         msg.setSubject("Información pase");
@@ -40,11 +41,11 @@ public class PassController {
         "R.U.T: " + pass.getRut()+"\n" +
         "Género: "+pass.getGender()+"\n"+
         "Razón: "+pass.getType()+"\n"+
-        "Inicio: "+pass.getInitialDate()+"\n"+
+        "Inicio: "+date+"\n"+
         "Fin: "+pass.getFinalDate()+"\n");
 
         javaMailSender.send(msg);
-
+        pass.setInitialDate(date);
         return passRepository.save(pass);
     }
 
