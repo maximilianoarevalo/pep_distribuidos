@@ -57,6 +57,8 @@ Mientras que para el caso de la base de datos, basta con crearla utilizando la p
 
 ## Pruebas y resultados
 
+Al momentos de realizar las pruebas, se omite el uso del envío de correo electrónico, esto debido a que gmail, outlook, y otras plataformas que permiten el envío de correos desde aplicaciones de terceros, permiten un número limitado de conexiones en un mismo instante, lo que genera que la plataforma deje de responder.
+
 Para las pruebas se realiza un test de carga utilizando el framework artillery, con el cuál se simula una cantidad de usuarios realizando peticiones simultaneamente en un segundo. Los resultados de las pruebas se representan en la siguiente tabla:
 
 |  consultas | respuestas promedio por segundo | escenarios completados | Tiempo total (s) | código 200 | código error | tiempo mínimo ms | tiempo máximo (ms) | mediana (ms) |
