@@ -73,6 +73,11 @@ permiso.
 
 ![Image4](./images/image4.png)
 
+Finalmente, el usuario es notificado con una copia del permiso temporal generado mediante un mensaje al correo electrónico
+indicado en el formulario.
+
+![Image5](./images/correoprueba.png)
+
 ## Características de los sistemas distribuidos
 
 |Característica|Descripción|¿El sistema lo posee?|
