@@ -57,5 +57,17 @@ Mientras que para el caso de la base de datos, basta con crearla utilizando la p
 
 ## Pruebas y resultados
 
-Pruebas y resultados
+Para las pruebas se realiza un test de carga utilizando el framework artillery, con el cuál se simula una cantidad de usuarios realizando peticiones simultaneamente en un segundo. Los resultados de las pruebas se representan en la siguiente tabla:
+
+|  consultas | respuestas promedio por segundo | escenarios completados | Tiempo total (s) | código 200 | código error | tiempo mínimo ms | tiempo máximo (ms) | mediana (ms) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  30 | 20.83 | 30 | 1 | 30 | 0 | 13 | 146.4 | 20.4 |
+|  100 | 50.51 | 100 | 2 | 100 | 0 | 19.7 | 547.7 | 30.1 |
+|  500 | 165.56 | 500 | 3 | 500 | 0 | 25.2 | 2510.1 | 1436.7 |
+|  1000 | 150.83 | 1000 | 6 | 1000 | 0 | 199.9 | 5220.9 | 3734 |
+|  2000 | 170.07 | 2000 | 11 | 2000 | 0 | 208 | 9286.8 | 5654.3 |
+|  3000 | 199.27 | 3000 | 15 | 3000 | 0 | 25.8 | 11805.7 | 5150.3 |
+|  4000 | 103.4 | 4000 | 38 | 4000 | 0 | 33.6 | 34812.4 | 8379.8 |
+|  5000 | 96.38 | 5000 | 52 | 5000 | 0 | 323.6 | 47216.4 | 18748.7 |
+|  10000 | 78 | 8293 | 128 | 8293 | 1708 | 21.5 | 1113758.4 | 38010.6 |
 
