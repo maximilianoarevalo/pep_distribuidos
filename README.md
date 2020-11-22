@@ -46,6 +46,33 @@ Lo cual despliega el frontend en la ruta "/localhost:8081"
 
 Mientras que para el caso de la base de datos, basta con crearla utilizando la plataforma PgAdmin4.
 
+## Implementación del sistema
+
+Al ingresar a la ruta correspondiente al frontend, se presenta un formulario que contiene los campos
+necesarios para generar el permiso temporal, tales como: nombres, apellidos, rut, correo electrónico,
+sexo y motivo del permiso. Al final se solicita marcar una casilla que indica que los datos ingresados
+son los correspondientes. Además existen dos botones, uno para generar el permiso y otro para solicitar uno 
+nuevo en caso de que ya haya obtenido uno.
+
+![Image1](./images/image1.png)
+
+Una vez que el usuario ingrese todos los campos requeridos para obtener el permiso temporal, es necesario que
+marque la casilla al final y luego presione el botón de "Generar Permiso".
+
+![Image2](./images/image2.png)
+
+Luego de presionar el botón de "Generar Permiso", al desplazar la página hacia abajo se presenta una alerta que
+indica la generación exitosa del permiso temporal. En la cual se entregan los datos del identificador del permiso generado,
+el nombre y rut del solicitante, el motivo del permiso y las fechas y hora de inicio y término de este.
+
+![Image3](./images/image3.png)
+
+En caso de que se haya generado un permiso temporal y se requiera obtener otro nuevamente, solo basta con presionar
+el botón "Solicitar nuevo permiso", el cual vacía el formulario y lo dispone para ingresar los datos para un nuevo
+permiso. 
+
+![Image4](./images/image4.png)
+
 ## Características de los sistemas distribuidos
 
 |Característica|Descripción|¿El sistema lo posee?|
@@ -61,7 +88,7 @@ Al momentos de realizar las pruebas, se omite el uso del envío de correo electr
 
 Para las pruebas se realiza un test de carga utilizando el framework artillery, con el cuál se simula una cantidad de usuarios realizando peticiones simultaneamente en un segundo. Los resultados de las pruebas se representan en la siguiente tabla:
 
-|  consultas | respuestas promedio por segundo | escenarios completados | Tiempo total (s) | código 200 | código error | tiempo mínimo ms | tiempo máximo (ms) | mediana (ms) |
+|  Consultas | Respuestas promedio por segundo | Escenarios completados | Tiempo total (s) | Código 200 | Código error | Tiempo mínimo (ms) | Tiempo máximo (ms) | Mediana (ms) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  30 | 20.83 | 30 | 1 | 30 | 0 | 13 | 146.4 | 20.4 |
 |  100 | 50.51 | 100 | 2 | 100 | 0 | 19.7 | 547.7 | 30.1 |
