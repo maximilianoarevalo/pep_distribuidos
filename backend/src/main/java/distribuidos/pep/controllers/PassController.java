@@ -31,9 +31,9 @@ public class PassController {
     public Pass createPass(@RequestBody Pass pass) {
         pass.setInitialDate(new Date(System.currentTimeMillis()));
         java.util.Date date = java.util.Calendar.getInstance().getTime();
-        System.out.println("Fecha inicial: "+date);
+        //System.out.println("Fecha inicial: "+date);
         pass.setFinalDate(pass.sumarRestarHorasFecha(pass.getInitialDate(), 2));
-        System.out.println("Fecha final: "+pass.getFinalDate());
+        //System.out.println("Fecha final: "+pass.getFinalDate());
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(pass.getEmail());
         msg.setSubject("Información pase");
