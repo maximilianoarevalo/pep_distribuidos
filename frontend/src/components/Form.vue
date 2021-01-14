@@ -151,7 +151,8 @@ import axios from 'axios'
           type: this.form.permission,
           rut: this.form.rut,
         };
-        axios.post('http://localhost:8080/app/newPass',parameters)
+        //axios.post('http://localhost:8080/app/newPass',parameters)
+        axios.post('http://35.199.69.82:8080/app/newPass',parameters)
         .then((response) => {
           this.id = response.data.id
           this.fullName = response.data.names +' '+response.data.lastName

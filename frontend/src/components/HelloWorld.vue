@@ -51,7 +51,8 @@ import axios from 'axios'
       }
     },
     mounted(){
-      axios.get('http://localhost:8080/app/pass')
+      //axios.get('http://localhost:8080/app/pass')
+      axios.get('http://35.199.69.82:8080/app/pass')
       .then(response => (this.info = response))
     }
   }
