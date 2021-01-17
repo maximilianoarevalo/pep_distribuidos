@@ -35,7 +35,7 @@ public class PassController {
         pass.setFinalDate(pass.sumarRestarHorasFecha(pass.getInitialDate(), 2));
         //System.out.println("Fecha final: "+pass.getFinalDate());
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(pass.getEmail());
+        /*msg.setTo(pass.getEmail());
         msg.setSubject("Información pase");
         msg.setText("Nombre: "+pass.getNames()+" "+pass.getLastName()+"\n"+
         "R.U.T: " + pass.getRut()+"\n" +
@@ -44,7 +44,7 @@ public class PassController {
         "Inicio: "+date+"\n"+
         "Fin: "+pass.getFinalDate()+"\n");
 
-        javaMailSender.send(msg);
+        javaMailSender.send(msg);*/
         pass.setInitialDate(date);
         return passRepository.save(pass);
     }
