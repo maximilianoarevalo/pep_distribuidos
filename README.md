@@ -112,3 +112,32 @@ Como se puede apreciar tanto en la tabla como en el gráfico, al aumentar la can
 También se puede evidenciar que a medida se aumenta la cantidad de consultas realizadas, también aumenta el tiempo necesario para poder responder a todas las consultas, o a gran parte de ellas.
 
 Si bien se considera que en general se tiene un buen rendimiento por parte de las consultas completadas, se considera que esto es en parte porque el sistema está montado de manera local, por lo que las consultas no dependen de variables relacionadas con el internet.
+
+# Pep 2: Sistemas Distribuidos
+
+## Arquitectura inicial
+
+Recordando, la arquitectura inicial cuenta con la separación correspondiente a FrontEnd, BackEnd y Base de Datos. Considerando las herramientas de Vue.js, Spring Boot y PostgreSQL para cada una de ellas respectivamente.
+
+![Arquitectura](./images/arquitectura.png)
+
+## Características iniciales
+
+Para la entrega anterior, las características de Disponibilidad, Transparencia y Escalabilidad no se encontraban implementadas. Por lo que las posibles mejoras para solucionar este problema consideran:
+
+- Disponibilidad: Montar la aplicación en un servidor remoto accesible desde cualquier dirección IP y generar réplicas en la base de datos.
+
+- Transparencia: Distribuir los componentes del sistema en diferentes máquinas, en este caso, servidores de Google Cloud.
+
+- Escalabilidad: Se pueden agregar recursos a la máquina en la cual se integra la aplicación (sin afectar su integridad), montar el BackEnd con Kubernetes, montar el FrontEnd utilizando Nginx y generar hashing en la base de datos.
+
+## Mejoras implementadas
+
+La siguiente tabla indica las características de un sistema distribuido que se cumplían para la entrega anterior, indicando la modificación realizada para solucionar este problema.
+
+|Característica|¿Por qué no lo cumple|Mejoras|
+|--------------|-----------|---------------------|
+|Disponibilidad|El sistema no lo cumple porque actualmente se encuentra implementado de manera local, por lo que no accede a recursos remotos. Además, si el dispositivo utilizado falla, una de las desventajas es que el sistema dejaría de responder y otra es que si se pierden los datos no sería posible ponerlos a disposición de manera rápida.|Las modificaciones realizadas para esta implementación consisten en diseñar una arquitectura disponible de manera pública, a la cual los usuarios pueden acceder de manera remota. Para esto se implementa el frontend, backend y base de datos en servidores de Google Cloud. Además, se considera el uso de réplicas para el backend y la base de datos para mantener el acceso al sistema cuando exista alguna falla en alguno de estos elementos en la arquitectura.
+|Transparencia de la distribución|El sistema no puede ser considerado transparente, ya que actualmente funciona de manera local y por ende no se encuentra distribuido.|Las modificaciones realizadas para esta implementación es separar los dispositivos en los cuales el sistema se encuentra montado. Además, se implementan réplicas y un balanceador de carga para evitar fallos ante la vista del usuario, aunque un detalle es que la dirección del frontend y el backend corresponden a las del servidor.|
+|Escalabilidad|El sistema no es escalable, ya no tiene la posibilidad de asignar los recursos de manera dinámica en base a la demanda. Además, no es posible responder varias consultas a la vez debido a que se pueden producir cuellos de botella y tampoco se implementa caché, por lo que los tiempos de respuesta no se ven disminuidos.|Las modificaciones realizadas permiten una escalabilidad vertical al utilizar dispositivos que cuenten con más recursos disponibles, además la implementación de kubernetes tanto del backend como de la base de datos, para poder contar con una mayor capacidad de consultas. El sistema permite responder varias consultas a la vez, pero no se implementa el uso de caché porque como los permisos son únicos y no son reutilizables, constantemente se generará información nueva. Además, una de las maneras para contribuir con la escalabilidad es mediante la replicación de la base de datos.|
+
