@@ -143,6 +143,7 @@ La siguiente tabla indica las características de un sistema distribuido que se 
 
 ## Arquitectura actual
 
+Actualmente la arquitectura cuenta con una máquina virtual en Google Cloud que está encargada de desplegar el FrontEnd utilizando una imagen de Docker de Nginx, la cual se conecta con Kubernetes y el balanceador de carga que cuenta con imágenes de Docker de SpringBoot considerando un clúster de 2 pods para la ejecución del BackEnd, mientras que para la base de datos se utiliza CloudSQL considerando una instancia main de PostgreSQL junto con su respectiva réplica para el almacenamiento de información.
 ![Kubernetes](./images/kubernetes.png)
 
 ## Análisis
