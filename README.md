@@ -144,3 +144,20 @@ La siguiente tabla indica las características de un sistema distribuido que se 
 ## Arquitectura actual
 
 ![Kubernetes](./images/kubernetes.png)
+
+## Análisis
+
+Para generar el análisis al sistema, se monta también el sistema en tomcat, para poder comparar el afecto de kubernetes en el back-end. Se genera un test de estrés con 30, 100, 500, 1000 y 5000 consultas al back-end en un segundo (cada consulta es como si un usuario generara un permiso). De estas pruebas se obtiene el tiempo promedio de respuestas (cuanto tiempo se demora el back-end en atender la petición del usuario en milisegundos) y el promedio de respuestas por segundo (cuántas peticiones es capaz de satisfacer el back-end por segundo)
+
+![Tiempo promedio de respuestas](./images/Tiempopromedioderespuestas.png)
+
+![Promedio de respuestas por segundo](./images/Promedioderespuestasporsegundo.png)
+
+En función de las imágenes mostradas, se puede ver que:
+
+- Kubernetes presenta mayor tiempo promedio de respuestas.
+- Kubernetes mantiene un equilibrio en cuanto a respuestas por segundo (se mantiene estable en los mismos valores)
+- La aplicación montada en Tomcat tiene un menor tiempo promedio de respuesta
+- A su vez, del experimento, se evidencia que con 1000 peticiones el back-end montado en Tomcat comienza a perder solicitudes debido a exceso del tiempo para responder, no así con kubernetes que comienza a obtener este error recién con 5000 peticiones y en menor medida.
+
+De lo anterior, se considera que la arquitectura montada presenta un cuello de botella en la base de datos, ya que independiente la aplicación que haga la consulta, todas se hacen por el mismo camino a la base de datos. A su vez, se considera que kubernetes presenta mayor tiempo promedio de respuesta debido a que el balanceador de carga si no se configura como se debe, puede generar retrasos en el tiempo. Finalmente también se observa que la aplicación montada con kubernetes conserva de mejor forma la integridad de las solicitudes, ya que genera menos pérdida de peticiones por exceso de tiempo.
